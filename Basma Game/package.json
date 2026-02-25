@@ -12,7 +12,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "preview": "vite preview --host 0.0.0.0",
-    "electron:build": "bun run build && electron-builder --win --nsis"
+    "electron:build": "bun run build && electron-builder --win nsis"
   },
   "packageManager": "bun@1.2.22",
   "build": {

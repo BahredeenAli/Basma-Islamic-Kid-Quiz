@@ -3,6 +3,10 @@
   "private": true,
   "version": "1.0.0",
   "description": "Islamic Kids Quiz Game",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BahredeenAli/Basma-Islamic-Kid-Quiz.git"
+  },
   "author": "Bahredeen Ali",
   "type": "module",
   "main": "main.cjs",
@@ -12,7 +16,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "preview": "vite preview --host 0.0.0.0",
-    "electron:build": "bun run build && electron-builder --win nsis"
+    "electron:build": "bun run build && electron-builder --win nsis --publish never"
   },
   "packageManager": "bun@1.2.22",
   "build": {

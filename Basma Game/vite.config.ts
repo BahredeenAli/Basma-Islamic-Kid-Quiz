@@ -10,6 +10,8 @@ dns.setDefaultResultOrder("verbatim");
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Set base to relative paths for Electron compatibility
+  base: "./", 
   plugins: [
     react(),
     tailwindcss(),
@@ -32,4 +34,9 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // Ensure the build output is consistent with your electron-builder config
+  build: {
+    outDir: "dist",
+    emptyOutDir: true,
+  }
 });

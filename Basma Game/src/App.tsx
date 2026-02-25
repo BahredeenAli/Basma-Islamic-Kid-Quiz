@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Trophy, Clock, Heart, Volume2, VolumeX, Play, RotateCcw, User, CheckCircle2, XCircle, Award } from 'lucide-react';
 import { Howl } from 'howler';
@@ -19,13 +20,13 @@ interface LeaderboardEntry {
 
 // --- Sounds ---
 const sounds = {
-  correct: new Howl({ src: ['https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3'], volume: 0.5 }),
-  wrong: new Howl({ src: ['https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3'], volume: 0.5 }),
-  click: new Howl({ src: ['https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'], volume: 0.3 }),
-  bg: new Howl({ src: ['https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3'], loop: true, volume: 0.1 }),
+  correct: new Howl({ src: ['https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3'], volume: 0.5, html5: true }),
+  wrong: new Howl({ src: ['https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3'], volume: 0.5, html5: true }),
+  click: new Howl({ src: ['https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'], volume: 0.3, html5: true }),
+  bg: new Howl({ src: ['https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3'], loop: true, volume: 0.1, html5: true }),
 };
 
-// --- Questions (Expanded to 100) ---
+// --- Questions ---
 const REAL_QUESTIONS: Question[] = [
   { id: 1, question: "የመጀመሪያው የሰው ልጅ ማነው?", options: ["አደም", "ኑህ", "ኢብራሂም", "ሙሳ"], correctAnswer: 0 },
   { id: 2, question: "የመጀመሪያው ሙአዚን ማነው?", options: ["አቡ በክር", "ቢላል", "ዑመር", "ዑስማን"], correctAnswer: 1 },
@@ -127,7 +128,7 @@ const REAL_QUESTIONS: Question[] = [
   { id: 98, question: "የእስልምና መመሪያ መጽሐፍ ማን ይባላል?", options: ["ሀዲስ", "ተውራት", "ቁርዓን", "ኢንጂል"], correctAnswer: 2 },
   { id: 99, question: "የመጀመሪያው የእስልምና ዋና ከተማ የት ነበር?", options: ["መካ", "መዲና", "ኩፋ", "ደማስቆ"], correctAnswer: 1 },
   { id: 100, question: "የእስልምና ሰላምታ ትርጉሙ ምንድነው?", options: ["ደህና ሁን", "ሰላም ለአንተ ይሁን", "እንዴት ነህ", "መልካም ቀን"], correctAnswer: 1 }
-]; // This closing bracket and semicolon must be here. Remove any "...Array.from" code after this.
+];
 
 const ENCOURAGEMENTS = [
   "ማሻ አላህ! በጣም ጎበዝ ነህ/ሽ።",
@@ -137,7 +138,7 @@ const ENCOURAGEMENTS = [
   "ሱብሀን አላህ! ድንቅ ብቃት ነው።"
 ];
 
-export default function App() {
+function GameContent() {
   const [gameState, setGameState] = useState<'intro' | 'playing' | 'gameover'>('intro');
   const [playerName, setPlayerName] = useState('');
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -210,7 +211,7 @@ export default function App() {
   }, [currentQuestionIndex, score, playerName]);
 
   useEffect(() => {
-    let interval: number;
+    let interval: NodeJS.Timeout;
     if (gameState === 'playing' && !feedback.type) {
       interval = setInterval(() => {
         setTimer(prev => {
@@ -476,5 +477,16 @@ export default function App() {
         <p className="text-emerald-900/30 font-black text-xs tracking-[0.4em] uppercase">MashaAllah Kidz Quiz</p>
       </footer>
     </div>
+  );
+}
+
+// Wrapper to include HashRouter
+export default function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<GameContent />} />
+      </Routes>
+    </Router>
   );
 }

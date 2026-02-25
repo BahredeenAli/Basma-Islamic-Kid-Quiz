@@ -127,14 +127,7 @@ const REAL_QUESTIONS: Question[] = [
   { id: 98, question: "የእስልምና መመሪያ መጽሐፍ ማን ይባላል?", options: ["ሀዲስ", "ተውራት", "ቁርዓን", "ኢንጂል"], correctAnswer: 2 },
   { id: 99, question: "የመጀመሪያው የእስልምና ዋና ከተማ የት ነበር?", options: ["መካ", "መዲና", "ኩፋ", "ደማስቆ"], correctAnswer: 1 },
   { id: 100, question: "የእስልምና ሰላምታ ትርጉሙ ምንድነው?", options: ["ደህና ሁን", "ሰላም ለአንተ ይሁን", "እንዴት ነህ", "መልካም ቀን"], correctAnswer: 1 }
-];
-  ...Array.from({ length: 75 }, (_, i) => ({
-    id: i + 26,
-    question: `እስላማዊ ጥያቄ ቁጥር ${i + 26}?`,
-    options: ["ትክክለኛ መልስ", "የተሳሳተ መልስ 1", "የተሳሳተ መልስ 2", "የተሳሳተ መልስ 3"],
-    correctAnswer: 0
-  }))
-];
+]; // This closing bracket and semicolon must be here. Remove any "...Array.from" code after this.
 
 const ENCOURAGEMENTS = [
   "ማሻ አላህ! በጣም ጎበዝ ነህ/ሽ።",

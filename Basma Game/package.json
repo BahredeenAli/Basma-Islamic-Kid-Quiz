@@ -1,19 +1,32 @@
 {
   "name": "react-game-template",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "main": "main.cjs",
   "scripts": {
     "dev": "PORT=3000 vite --host 0.0.0.0",
-    "build": "tsc -b && vite build",
+    "build": "tsc -p tsconfig.json && vite build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "preview": "vite preview --host 0.0.0.0",
-    "build:watch": "vite build --watch > build.log 2>&1",
-    "watch:errors": "node dala-internal-watch-build-errors.js",
-    "preview:dev": "concurrently \"npm run build:watch\""
+    "electron:build": "bun run build && electron-builder --win dir"
   },
   "packageManager": "bun@1.2.22",
+  "build": {
+    "appId": "com.basma.game",
+    "productName": "BasmaIslamicGame",
+    "files": [
+      "dist/**/*",
+      "main.cjs"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": ["zip"]
+    }
+  },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
@@ -81,6 +94,8 @@
     "zod": "^4.1.11"
   },
   "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3",
     "@types/howler": "^2.2.12",
     "@types/three": "^0.182.0",
     "@eslint/js": "^9.36.0",

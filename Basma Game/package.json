@@ -19,12 +19,20 @@
     "electron:build": "bun run build && electron-builder --win nsis --publish never"
   },
   "packageManager": "bun@1.2.22",
-  "build": {
+ "build": {
     "appId": "com.basma.game",
     "productName": "BasmaIslamicGame",
     "files": [
       "dist/**/*",
-      "main.cjs"
+      "main.cjs",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "dist",
+        "to": "dist",
+        "filter": ["**/*"]
+      }
     ],
     "directories": {
       "output": "release"

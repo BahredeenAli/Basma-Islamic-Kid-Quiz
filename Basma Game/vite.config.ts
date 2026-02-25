@@ -3,15 +3,14 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import checker from "vite-plugin-checker";
-
 import dns from "node:dns";
 
 dns.setDefaultResultOrder("verbatim");
 
 // https://vite.dev/config/
 export default defineConfig({
-  // Set base to relative paths for Electron compatibility
-  base: "./", 
+  // CRITICAL: Forces relative paths (./) instead of absolute paths (/)
+  base: "./",
   plugins: [
     react(),
     tailwindcss(),
@@ -34,9 +33,20 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  // Ensure the build output is consistent with your electron-builder config
   build: {
+    // Ensures the output goes to 'dist' which Electron expects
     outDir: "dist",
+    assetsDir: "assets",
     emptyOutDir: true,
-  }
+    // Prevents issues with large assets in Electron
+    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      output: {
+        // Standardizes naming to ensure Electron can always map the files
+        entryFileNames: `assets/[name].js`,
+        chunkFileNames: `assets/[name].js`,
+        assetFileNames: `assets/[name].[ext]`,
+      },
+    },
+  },
 });

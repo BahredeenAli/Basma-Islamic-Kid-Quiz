@@ -1,7 +1,9 @@
 {
-  "name": "react-game-template",
+  "name": "basma-islamic-game",
   "private": true,
   "version": "1.0.0",
+  "description": "Islamic Kids Quiz Game",
+  "author": "Bahredeen Ali",
   "type": "module",
   "main": "main.cjs",
   "scripts": {
@@ -10,7 +12,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "preview": "vite preview --host 0.0.0.0",
-    "electron:build": "bun run build && electron-builder --win dir"
+    "electron:build": "bun run build && electron-builder --win --nsis"
   },
   "packageManager": "bun@1.2.22",
   "build": {
@@ -24,7 +26,14 @@
       "output": "release"
     },
     "win": {
-      "target": ["zip"]
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true,
+      "runAfterFinish": true
     }
   },
   "dependencies": {
@@ -96,6 +105,7 @@
   "devDependencies": {
     "electron": "^31.0.0",
     "electron-builder": "^24.13.3",
+    "wait-on": "^7.2.0",
     "@types/howler": "^2.2.12",
     "@types/three": "^0.182.0",
     "@eslint/js": "^9.36.0",

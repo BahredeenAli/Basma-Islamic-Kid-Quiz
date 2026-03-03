@@ -9,8 +9,8 @@ dns.setDefaultResultOrder("verbatim");
 
 // https://vite.dev/config/
 export default defineConfig({
-  // CRITICAL: Forces relative paths (./) instead of absolute paths (/)
-  base: "./",
+  // CRITICAL: Forces relative paths so Electron can find assets on the local drive
+  base: "./", 
   plugins: [
     react(),
     tailwindcss(),
@@ -34,15 +34,17 @@ export default defineConfig({
     },
   },
   build: {
-    // Ensures the output goes to 'dist' which Electron expects
+    // Ensures the build is output to the 'dist' folder Electron is looking for
     outDir: "dist",
     assetsDir: "assets",
     emptyOutDir: true,
-    // Prevents issues with large assets in Electron
-    chunkSizeWarningLimit: 1000,
+    // Helps Electron handle the JavaScript modules correctly
+    modulePreload: {
+      polyfill: false,
+    },
     rollupOptions: {
       output: {
-        // Standardizes naming to ensure Electron can always map the files
+        // Keeps file names predictable
         entryFileNames: `assets/[name].js`,
         chunkFileNames: `assets/[name].js`,
         assetFileNames: `assets/[name].[ext]`,

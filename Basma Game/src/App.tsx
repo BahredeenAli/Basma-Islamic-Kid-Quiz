@@ -94,7 +94,7 @@ const MASTER_QUESTIONS: Question[] = [
   { id: 53, question: "ሐጅ ማድረግ በዕድሜ ልክ ስንት ጊዜ ግዴታ ነው?", options: ["1", "2", "3", "በየዓመቱ"], correctAnswer: 0 },
   { id: 54, question: "የረመዳን ጾም የተደነገገው በየትኛው የሂጅራ ዓመት ነው?", options: ["1ኛ", "2ኛ", "3ኛ", "4ኛ"], correctAnswer: 1 },
   { id: 55, question: "የመጀመሪያው የሰው ልጅ ነቢይ ማነው?", options: ["ኑህ", "ኢድሪስ", "አደም", "ሸይስ"], correctAnswer: 2 },
-  { id: 56, question: "ከነቢያት መካከል መናገር የጀመረው ገና በሕፃንነቱ ማነው?", options: ["ዩሱፍ", "ኢሳ", "ያህያ", "ሙሳ"], correctAnswer: 1 },
+  { id: 56, question: "ከነቢያት መካከል ገና በሕፃንነቱ መናገር የጀመረው ማነው?", options: ["ዩሱፍ", "ኢሳ", "ያህያ", "ሙሳ"], correctAnswer: 1 },
   { id: 57, question: "አላህ ለነቢዩ ዳውድ የሰጣቸው መጽሐፍ ስሙ ማን ነው?", options: ["ተውራት", "ኢንጂል", "ዘቡር", "ሱሁፍ"], correctAnswer: 2 },
   { id: 58, question: "ከእስልምና በፊት መካ ውስጥ ይገኝ የነበረው ጣዖት ትልቁ ማነው?", options: ["ላውት", "ዑዛ", "ሁበል", "መናት"], correctAnswer: 2 },
   { id: 59, question: "የነቢዩ ሙሐመድ (ሰ.ዐ.ወ) የልጅ ልጆች እነማን ናቸው?", options: ["አሊና ዑስማን", "ሀሰንና ሁሴን", "ኡመርና አቡበክር", "ዘይድና ፋሲል"], correctAnswer: 1 },
@@ -105,7 +105,7 @@ const MASTER_QUESTIONS: Question[] = [
   { id: 64, question: "የአላህ ሰይፍ (ሰይፉላህ) የሚል ቅጽል ስም ያለው ሰሃባ ማነው?", options: ["ሀምዛ", "ኻሊድ ኢብኑ ወሊድ", "ዑመር", "አሊ"], correctAnswer: 1 },
   { id: 65, question: "በአሁድ ጦርነት ላይ የተሰውት የነቢዩ አጎት ማን ናቸው?", options: ["አቡ ጣሊብ", "ሀምዛ", "አባስ", "አቡ ለሃብ"], correctAnswer: 1 },
   { id: 66, question: "የቁርዓን ትልቁ አንቀጽ (አያት) የትኛው ነው?", options: ["አያተል ኩርሲ", "አያተ ዳይን", "አያተ ኑር", "አያተ ሪባ"], correctAnswer: 1 },
-  { id: 67, question: "የመጀመሪያው የቁርዓን ቃል ምንድነው?", options: ["አልሀምዱሊላህ", "ኢቅራእ", "ቢስሚላህ", "ቁል"], correctAnswer: 1 },
+  { id: 67, question: "በመጀመሪያው የወረደው የቁርዓን ቃል ምንድነው?", options: ["አልሀምዱሊላህ", "ኢቅራእ", "ቢስሚላህ", "ቁል"], correctAnswer: 1 },
   { id: 68, question: "ነቢዩ ሙሐመድ (ሰ.ዐ.ወ) ያረፉት በስንት ዓመታቸው ነው?", options: ["60", "63", "65", "70"], correctAnswer: 1 },
   { id: 69, question: "የጀነት በሮች ስንት ናቸው?", options: ["5", "7", "8", "10"], correctAnswer: 2 },
   { id: 70, question: "የጀሃነም በሮች ስንት ናቸው?", options: ["5", "7", "8", "10"], correctAnswer: 1 },
@@ -118,7 +118,7 @@ const MASTER_QUESTIONS: Question[] = [
   { id: 77, question: "የነቢዩ ሙሐመድ (ሰ.ዐ.ወ) ታናሽ ልጅ ማን ናት?", options: ["ዘይነብ", "ሩቂያ", "ኡሙ ኩልሱም", "ፋጢማ"], correctAnswer: 3 },
   { id: 78, question: "ሰላምታ (አሰላሙ አለይኩም) መስጠት ምንድነው?", options: ["ግዴታ", "ሱና", "ሀራም", "መክሩህ"], correctAnswer: 1 },
   { id: 79, question: "ቁርዓን ውስጥ ስሟ የተጠቀሰ ብቸኛ ሴት ማን ናት?", options: ["ኸዲጃ", "ፋጢማ", "መርየም", "አኢሻ"], correctAnswer: 2 },
-  { id: 80, question: "የነቢዩ ሙሐመድ (ሰ.ዐ.ወ) የልደት ቀን መቼ ነው?", options: ["ረቢአል አወል 12", "ረመዳን 27", "ሸዋል 1", "ሙሃረም 10"], correctAnswer: 0 },
+  { id: 80, question: "ፍትሀዊነቱነ ነቢዩ ሙሀመድ የመሰከሩለት የሀበሻው ንጉስ ማን ይባላል?", options: ["ነጃሺ", "ሂረቅል", "አህመድ አል ጋዚ", "አባ ጂፋር"], correctAnswer: 0 },
   { id: 81, question: "የነቢዩ ሙሐመድ (ሰ.ዐ.ወ) አሳዳጊ እናት ማን ናት?", options: ["አሚና", "ሀሊማ", "ከዲጃ", "ሰውዳ"], correctAnswer: 1 },
   { id: 82, question: "በእስልምና የመጀመሪያው ጦርነት በስንት ሂጅራ ተካሄደ?", options: ["1ኛ", "2ኛ", "3ኛ", "4ኛ"], correctAnswer: 1 },
   { id: 83, question: "የጀነት መክፈቻ ምንድነው?", options: ["ሶላት", "ዘካ", "ላ ኢላሀ ኢለላህ", "ሐጅ"], correctAnswer: 2 },
@@ -135,9 +135,9 @@ const MASTER_QUESTIONS: Question[] = [
   { id: 94, question: "ቁርዓን ውስጥ 'ቢስሚላህ' ሁለት ጊዜ የተጠቀሰበት ሱራ የትኛው ነው?", options: ["ናምል", "በቀራ", "ሁድ", "ዩሱፍ"], correctAnswer: 0 },
   { id: 95, question: "ነቢዩ ሙሳ የከፈሉት ባሕር ስሙ ማን ነው?", options: ["ቀይ ባሕር", "ጥቁር ባሕር", "ሜዲትራኒያን", "ህንድ ውቅያኖስ"], correctAnswer: 0 },
   { id: 96, question: "አስሃቡል ካህፍ (የዋሻው ሰዎች) ለስንት ዓመት ተኙ?", options: ["100", "200", "309", "500"], correctAnswer: 2 },
-  { id: 97, question: "ነቢዩ ዩኑስ የወረወሩበት ቦታ የት ነበር?", options: ["ጉድጓድ", "ባሕር", "በረሃ", "ተራራ"], correctAnswer: 0 },
+  { id: 97, question: "አህመድ ኢብኑ ኢብራሂም አል ጋዚ ሊብነ ድንግልን የረቱበት ቦታ ምን ይባላል?", options: ["ሽንብራ ኩሬ", "አዋሽ", "ሀረር", "አፍዴራ"], correctAnswer: 0 },
   { id: 98, question: "የእስልምና መመሪያ መጽሐፍ ማን ይባላል?", options: ["ሀዲስ", "ተውራት", "ቁርዓን", "ኢንጂል"], correctAnswer: 2 },
-  { id: 99, question: "የመጀመሪያው የእስልምና ዋና ከተማ የት ነበር?", options: ["መካ", "መዲና", "ኩፋ", "ደማስቆ"], correctAnswer: 1 },
+  { id: 99, question: "የነቢዩ (ሰ.ዐ.ወ) ዋና ከተማ የት ነበር?", options: ["መካ", "መዲና", "ኩፋ", "ደማስቆ"], correctAnswer: 1 },
   { id: 100, question: "የእስልምና ሰላምታ ትርጉሙ ምንድነው?", options: ["ደህና ሁን", "ሰላም ለአንተ ይሁን", "እንዴት ነህ", "መልካም ቀን"], correctAnswer: 1 }
 ];
 
@@ -330,8 +330,8 @@ function GameContent() {
             ☪
           </div>
           <div>
-            <h1 className="text-xl font-black text-emerald-900 tracking-tight">የህጻናት ኢስላማዊ ጌም</h1>
-            <p className="text-[10px] text-emerald-500 font-black uppercase tracking-widest">Islamic Kidz Quiz</p>
+            <h1 className="text-xl font-black text-emerald-900 tracking-tight">በስማ የህጻናት ኢስላማዊ ጌም</h1>
+            <p className="text-[10px] text-emerald-500 font-black uppercase tracking-widest">BASMA Islamic Kidz Quiz</p>
           </div>
         </div>
         <button 
@@ -461,7 +461,7 @@ function GameContent() {
             >
               <div className="bg-white p-10 rounded-[3rem] shadow-2xl border-t-[16px] border-red-500 text-center">
                 <div className="text-8xl mb-6 animate-bounce">😢</div>
-                <h2 className="text-6xl font-black text-red-600 mb-2 tracking-tighter">ፎርሸሀል!</h2>
+                <h2 className="text-6xl font-black text-red-600 mb-2 tracking-tighter">ለጊዜው ጨዋታው አልቋል!</h2>
                 <p className="text-2xl mb-8 font-bold text-emerald-900">
                   {playerName} የሰበሰብከው/ሽው ውጤት: <span className="text-emerald-600 font-black text-4xl block mt-2">{score}</span>
                 </p>
@@ -512,7 +512,7 @@ function GameContent() {
       </main>
 
       <footer className="mt-12 p-8 text-center pb-20">
-        <p className="text-emerald-900/30 font-black text-xs tracking-[0.4em] uppercase">MashaAllah Kidz Quiz</p>
+        <p className="text-emerald-900/30 font-black text-xs tracking-[0.4em] uppercase">BASMA Kidz Quiz</p>
       </footer>
     </div>
   );

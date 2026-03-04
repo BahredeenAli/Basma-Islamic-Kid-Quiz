@@ -127,7 +127,7 @@ const MASTER_QUESTIONS: Question[] = [
   { id: 86, question: "ከእስልምና ማዕዘናት አምስተኛው ምንድነው?", options: ["ሶላት", "ዘካ", "ጾም", "ሐጅ"], correctAnswer: 3 },
   { id: 87, question: "አላህ ለነቢዩ ሙሳ የሰጣቸው መጽሐፍ ማን ይባላል?", options: ["ተውራት", "ኢንጂል", "ዘቡር", "ቁርዓን"], correctAnswer: 0 },
   { id: 88, question: "አላህ ለነቢዩ ኢሳ የሰጣቸው መጽሐፍ ማን ይባላል?", options: ["ተውራት", "ኢንጂል", "ዘቡር", "ቁርዓን"], correctAnswer: 1 },
-  { id: 89, requested_question: "የቂያማ ምልክቶች በስንት ይከፈላሉ?", options: ["2", "3", "4", "5"], correctAnswer: 0 },
+  { id: 89, question: "የቂያማ ምልክቶች በስንት ይከፈላሉ?", options: ["2", "3", "4", "5"], correctAnswer: 0 },
   { id: 90, question: "የመጀመሪያው የእስልምና ወር የትኛው ነው?", options: ["ረመዳን", "ሙሃረም", "ረቢአል አወል", "ሸዋል"], correctAnswer: 1 },
   { id: 91, question: "የቁርዓን ረጅሙ ሱራ ስንት አንቀጾች አሉት?", options: ["114", "200", "286", "300"], correctAnswer: 2 },
   { id: 92, question: "ከመላእክት መካከል የሰው ልጅ ነፍስ የሚወስደው ማነው?", options: ["ሚካኤል", "አዝራኤል", "ጂብሪል", "ኢስራፊል"], correctAnswer: 1 },

@@ -166,7 +166,7 @@ function GameContent() {
   const [feedback, setFeedback] = useState<{ message: string; type: 'success' | 'error' | 'timeout' | null }>({ message: '', type: null });
 
   useEffect(() => {
-    const savedMute = localStorage.getItem('islamic_quiz_muted');
+    const savedMute = localStorage.getItem('islamic_quiz_muted'); 
     if (savedMute === 'true') setIsMuted(true);
     
     const savedLB = localStorage.getItem('islamic_quiz_leaderboard');

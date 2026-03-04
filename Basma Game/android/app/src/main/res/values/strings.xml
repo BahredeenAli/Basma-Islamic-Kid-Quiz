@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Basma Islamic Quiz</string>
+    <string name="title_activity_main">Basma Islamic Quiz</string>
+    <string name="package_name">com.basma.islamicquiz</string>
+    <string name="custom_url_scheme">com.basma.islamicquiz</string>
+</resources>

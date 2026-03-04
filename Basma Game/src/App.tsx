@@ -9,7 +9,8 @@ interface Question {
   id: number;
   question: string;
   options: string[];
-  correctAnswer: number;
+  correctAnswer: number; // Index in the ORIGINAL options array
+  actualCorrectText?: string; // Used to track the correct answer after shuffling options
 }
 
 interface LeaderboardEntry {
@@ -17,6 +18,16 @@ interface LeaderboardEntry {
   score: number;
   date: string;
 }
+
+// --- Shuffle Helper ---
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
 
 // --- Sounds ---
 const sounds = {
@@ -26,8 +37,8 @@ const sounds = {
   bg: new Howl({ src: ['https://www.soundhelix.com/examples/mp3/SoundHelix-Song-17.mp3'], loop: true, volume: 0.1, html5: true }),
 };
 
-// --- Questions ---
-const REAL_QUESTIONS: Question[] = [
+// --- Questions Database ---
+const MASTER_QUESTIONS: Question[] = [
   { id: 1, question: "የመጀመሪያው የሰው ልጅ ማነው?", options: ["አደም", "ኑህ", "ኢብራሂም", "ሙሳ"], correctAnswer: 0 },
   { id: 2, question: "የመጀመሪያው ሙአዚን ማነው?", options: ["አቡ በክር", "ቢላል", "ዑመር", "ዑስማን"], correctAnswer: 1 },
   { id: 3, question: "ቁርዓን የወረደበት ወር የትኛው ነው?", options: ["ሸዋል", "ረጀብ", "ረመዳን", "ዙል ሂጃ"], correctAnswer: 2 },
@@ -116,7 +127,7 @@ const REAL_QUESTIONS: Question[] = [
   { id: 86, question: "ከእስልምና ማዕዘናት አምስተኛው ምንድነው?", options: ["ሶላት", "ዘካ", "ጾም", "ሐጅ"], correctAnswer: 3 },
   { id: 87, question: "አላህ ለነቢዩ ሙሳ የሰጣቸው መጽሐፍ ማን ይባላል?", options: ["ተውራት", "ኢንጂል", "ዘቡር", "ቁርዓን"], correctAnswer: 0 },
   { id: 88, question: "አላህ ለነቢዩ ኢሳ የሰጣቸው መጽሐፍ ማን ይባላል?", options: ["ተውራት", "ኢንጂል", "ዘቡር", "ቁርዓን"], correctAnswer: 1 },
-  { id: 89, question: "የቂያማ ምልክቶች በስንት ይከፈላሉ?", options: ["2", "3", "4", "5"], correctAnswer: 0 },
+  { id: 89, requested_question: "የቂያማ ምልክቶች በስንት ይከፈላሉ?", options: ["2", "3", "4", "5"], correctAnswer: 0 },
   { id: 90, question: "የመጀመሪያው የእስልምና ወር የትኛው ነው?", options: ["ረመዳን", "ሙሃረም", "ረቢአል አወል", "ሸዋል"], correctAnswer: 1 },
   { id: 91, question: "የቁርዓን ረጅሙ ሱራ ስንት አንቀጾች አሉት?", options: ["114", "200", "286", "300"], correctAnswer: 2 },
   { id: 92, question: "ከመላእክት መካከል የሰው ልጅ ነፍስ የሚወስደው ማነው?", options: ["ሚካኤል", "አዝራኤል", "ጂብሪል", "ኢስራፊል"], correctAnswer: 1 },
@@ -124,24 +135,29 @@ const REAL_QUESTIONS: Question[] = [
   { id: 94, question: "ቁርዓን ውስጥ 'ቢስሚላህ' ሁለት ጊዜ የተጠቀሰበት ሱራ የትኛው ነው?", options: ["ናምል", "በቀራ", "ሁድ", "ዩሱፍ"], correctAnswer: 0 },
   { id: 95, question: "ነቢዩ ሙሳ የከፈሉት ባሕር ስሙ ማን ነው?", options: ["ቀይ ባሕር", "ጥቁር ባሕር", "ሜዲትራኒያን", "ህንድ ውቅያኖስ"], correctAnswer: 0 },
   { id: 96, question: "አስሃቡል ካህፍ (የዋሻው ሰዎች) ለስንት ዓመት ተኙ?", options: ["100", "200", "309", "500"], correctAnswer: 2 },
-  { id: 97, question: "ነቢዩ ዩሱፍ የወረወሩበት ቦታ የት ነበር?", options: ["ጉድጓድ", "ባሕር", "በረሃ", "ተራራ"], correctAnswer: 0 },
+  { id: 97, question: "ነቢዩ ዩኑስ የወረወሩበት ቦታ የት ነበር?", options: ["ጉድጓድ", "ባሕር", "በረሃ", "ተራራ"], correctAnswer: 0 },
   { id: 98, question: "የእስልምና መመሪያ መጽሐፍ ማን ይባላል?", options: ["ሀዲስ", "ተውራት", "ቁርዓን", "ኢንጂል"], correctAnswer: 2 },
   { id: 99, question: "የመጀመሪያው የእስልምና ዋና ከተማ የት ነበር?", options: ["መካ", "መዲና", "ኩፋ", "ደማስቆ"], correctAnswer: 1 },
   { id: 100, question: "የእስልምና ሰላምታ ትርጉሙ ምንድነው?", options: ["ደህና ሁን", "ሰላም ለአንተ ይሁን", "እንዴት ነህ", "መልካም ቀን"], correctAnswer: 1 }
 ];
 
 const ENCOURAGEMENTS = [
-  "ማሻ አላህ! በጣም ጎበዝ ነህ/ሽ።",
+  "ማሻ አላህ! በጣም ጎበዝ!,
   "አላህ እውቀትህን/ሽን ይጨምርልህ/ሽ!",
   "በጣም ድንቅ ነው!",
   "በርታ/ቺ! ጎበዝ ተማሪ ነህ/ሽ።",
   "ሱብሀን አላህ! ድንቅ ብቃት ነው።"
+  "ሀይ ማሻ አላህ"
 ];
 
 function GameContent() {
   const [gameState, setGameState] = useState<'intro' | 'playing' | 'gameover'>('intro');
   const [playerName, setPlayerName] = useState('');
+  
+  // New States for Shuffling
+  const [activeQuestions, setActiveQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  
   const [score, setScore] = useState(0);
   const [strikes, setStrikes] = useState(0);
   const [timer, setTimer] = useState(180);
@@ -185,22 +201,45 @@ function GameContent() {
     });
   };
 
+  // --- START GAME WITH SHUFFLE ---
   const handleStart = () => {
     if (!playerName.trim()) return;
+
+    // 1. Shuffle all questions and take them all (or a subset like 20)
+    const shuffledPool = shuffleArray(MASTER_QUESTIONS);
+    setActiveQuestions(shuffledPool);
+
     setGameState('playing');
     setScore(0);
     setStrikes(0);
     setCurrentQuestionIndex(0);
     setTimer(180);
     setFeedback({ message: '', type: null });
+
     if (!isMuted) {
       sounds.bg.stop();
       sounds.bg.play();
     }
   };
 
+  // --- CALCULATE SHUFFLED OPTIONS ---
+  const currentQuestionData = useMemo(() => {
+    if (activeQuestions.length === 0) return null;
+    const q = activeQuestions[currentQuestionIndex];
+    
+    // Save the text of the correct answer so we can find it after shuffling
+    const correctText = q.options[q.correctAnswer];
+    const shuffledOptions = shuffleArray(q.options);
+
+    return {
+      ...q,
+      shuffledOptions,
+      correctText
+    };
+  }, [activeQuestions, currentQuestionIndex]);
+
   const nextQuestion = useCallback(() => {
-    if (currentQuestionIndex + 1 < REAL_QUESTIONS.length) {
+    if (currentQuestionIndex + 1 < activeQuestions.length) {
       setCurrentQuestionIndex(prev => prev + 1);
       setTimer(180);
       setFeedback({ message: '', type: null });
@@ -208,10 +247,10 @@ function GameContent() {
       setGameState('gameover');
       saveScore(score);
     }
-  }, [currentQuestionIndex, score, playerName]);
+  }, [currentQuestionIndex, score, activeQuestions]);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: any;
     if (gameState === 'playing' && !feedback.type) {
       interval = setInterval(() => {
         setTimer(prev => {
@@ -245,11 +284,10 @@ function GameContent() {
     }, 2000);
   };
 
-  const handleAnswer = (index: number) => {
-    if (feedback.type) return;
+  const handleAnswer = (selectedText: string) => {
+    if (feedback.type || !currentQuestionData) return;
 
-    const question = REAL_QUESTIONS[currentQuestionIndex];
-    if (index === question.correctAnswer) {
+    if (selectedText === currentQuestionData.correctText) {
       const timeUsed = 180 - timer;
       let points = 5;
       if (timeUsed <= 120) {
@@ -268,7 +306,7 @@ function GameContent() {
       const newStrikes = strikes + 1;
       setStrikes(newStrikes);
       setFeedback({
-        message: `${playerName} መልሱ ትክክል አይደለም። ትክክለኛው መልስ: ${question.options[question.correctAnswer]}`,
+        message: `${playerName} መልሱ ትክክል አይደለም። ትክክለኛው መልስ: ${currentQuestionData.correctText}`,
         type: 'error'
       });
       if (!isMuted) sounds.wrong.play();
@@ -339,7 +377,7 @@ function GameContent() {
             </motion.div>
           )}
 
-          {gameState === 'playing' && (
+          {gameState === 'playing' && currentQuestionData && (
             <motion.div 
               key="playing"
               initial={{ opacity: 0 }}
@@ -369,18 +407,18 @@ function GameContent() {
               <div className="bg-white p-8 md:p-12 rounded-[3.5rem] shadow-2xl border-4 border-emerald-500 relative overflow-hidden min-h-[500px] flex flex-col">
                 <div className="mb-12 text-center">
                   <div className="bg-emerald-100 text-emerald-700 inline-block px-5 py-2 rounded-full font-black text-xs uppercase tracking-[0.2em] mb-6 shadow-sm border border-emerald-200">
-                    ጥያቄ {currentQuestionIndex + 1} / 100
+                    ጥያቄ {currentQuestionIndex + 1} / {activeQuestions.length}
                   </div>
                   <h2 className="text-3xl md:text-4xl font-black leading-tight text-emerald-950">
-                    {REAL_QUESTIONS[currentQuestionIndex].question}
+                    {currentQuestionData.question}
                   </h2>
                 </div>
 
                 <div className="grid grid-cols-1 gap-5 mt-auto">
-                  {REAL_QUESTIONS[currentQuestionIndex].options.map((opt, idx) => (
+                  {currentQuestionData.shuffledOptions.map((opt, idx) => (
                     <button
                       key={idx}
-                      onClick={() => handleAnswer(idx)}
+                      onClick={() => handleAnswer(opt)}
                       disabled={!!feedback.type}
                       className={`group relative p-6 text-left rounded-3xl border-4 border-emerald-50 hover:bg-emerald-50 hover:border-emerald-500 transition-all font-black text-xl flex items-center gap-5 ${feedback.type ? 'opacity-50' : 'active:scale-[0.98] active:shadow-inner'}`}
                     >

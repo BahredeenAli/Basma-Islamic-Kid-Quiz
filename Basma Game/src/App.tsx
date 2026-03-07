@@ -342,7 +342,7 @@ function GameContent() {
         </button>
       </nav>
 
-      <main className="max-w-2xl mx-auto p-4 pt-10">
+      <main className="w-full max-w-2xl mx-auto p-3 md:p-6 overflow-y-auto h-[calc(100vh-80px)]">
         <AnimatePresence mode="wait">
           {gameState === 'intro' && (
             <motion.div 

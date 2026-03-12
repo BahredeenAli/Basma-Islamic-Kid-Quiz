@@ -31,7 +31,12 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 
 // --- Sounds ---
 const sounds = {
-  welcome: new Howl({ src: ['https://assets.mixkit.co/active_storage/sfx/1435/1435-preview.mp3'], volume: 0.7, html5: true }),
+  welcome: new Howl({ 
+    src: ['https://actions.google.com/sounds/v1/alarms/bugle_tune.ogg'], // Backup chime
+    src: ['https://www.islamcan.com/audio/bismillah/bismillah1.mp3'], // Primary Bismillah
+    volume: 0.8,
+    html5: true,
+    format: ['mp3'] }),
   correct: new Howl({ src: ['https://assets.mixkit.co/active_storage/sfx/2000/2000-preview.mp3'], volume: 0.5, html5: true }),
   wrong: new Howl({ src: ['https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3'], volume: 0.5, html5: true }),
   click: new Howl({ src: ['https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3'], volume: 0.3, html5: true }),
